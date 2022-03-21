@@ -10,11 +10,11 @@ namespace Wordle
 
             Console.WriteLine(guessResult);
 
-            var bot = new BrycesSweetBot();
+            //var bot = new BrycesSweetBot();
 
-            var game = new WordleGame("saber");
+            //var game = new WordleGame("saber");
 
-            int guesses = game.Play(bot);
+            //int guesses = game.Play(bot);
         }
     }
 }
