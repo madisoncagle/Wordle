@@ -4,25 +4,25 @@ using System.Collections.Generic;
 namespace Wordle
 {
 
-	public class GuessResult
-	{
+    public class GuessResult
+    {
         public List<LetterGuess> Guess { get; set; }
 
         public GuessResult(string guess)
-		{
-			Guess = new List<LetterGuess>(guess.Length);
+        {
+            Guess = new List<LetterGuess>(guess.Length);
 
-			foreach(var letter in guess)
+            foreach (var letter in guess)
             {
-				Guess.Add(new LetterGuess(letter));
+                Guess.Add(new LetterGuess(letter));
             }
-		}
+        }
 
         public override string ToString()
         {
             string result = "";
 
-            foreach(var item in Guess)
+            foreach (var item in Guess)
             {
                 result += item.Letter;
             }
@@ -31,7 +31,7 @@ namespace Wordle
 
             foreach (var item in Guess)
             {
-                switch(item.LetterResult)
+                switch (item.LetterResult)
                 {
                     case LetterResult.Correct:
                         result += "C";
