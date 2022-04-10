@@ -6,18 +6,17 @@ namespace Wordle
     {
         static void Main(string[] args)
         {
-            //var guessResult = new GuessResult("arise");
-
-            //Console.WriteLine(guessResult);
-
-            var bot = new Squid();
+            /*var squid = new Squid();
 
             var game = new WordleGame("saber");
             game.MaxGuesses = 6;
 
-            int guesses = game.Play(bot);
+            int guesses = game.Play(squid);
 
-            Console.WriteLine(guesses);
+            Console.WriteLine(guesses);*/
+
+            //GuessResult result = game.CheckGuess("sssss");
+            //Console.WriteLine(result);
         }
     }
 }

@@ -32,26 +32,21 @@ namespace Wordle
             return guessNumber;
         }
 
-        // TODO
         public GuessResult CheckGuess(string guess)
         {
             GuessResult result = new GuessResult(guess);
             string secretCopy = new string(SecretWord);
 
-            // check for correct
             for (int i = 0; i < SecretWord.Length; i++)
             {
+                // check for correct
                 if (guess[i] == SecretWord[i])
                 {
                     result.Guess[i].LetterResult = LetterResult.Correct;
                     secretCopy = secretCopy.Remove(secretCopy.IndexOf(guess[i]), 1);
                 }
-            }
-
-            // check for misplaced
-            for (int i = 0; i < SecretWord.Length; i++)
-            {
-                if (secretCopy.Contains(guess[i]) && result.Guess[i].LetterResult == LetterResult.Incorrect)
+                // check for misplaced
+                else if (secretCopy.Contains(guess[i]) && result.Guess[i].LetterResult == LetterResult.Incorrect)
                 {
                     result.Guess[i].LetterResult = LetterResult.Misplaced;
                     secretCopy = secretCopy.Remove(secretCopy.IndexOf(guess[i]), 1);
