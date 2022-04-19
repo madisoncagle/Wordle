@@ -40,15 +40,6 @@ namespace Wordle
                 }
             }
 
-            // pick a word
-            /*foreach (string word in options.ToList())
-            {
-                if (rgx.IsMatch(word) && keepers.IsMatch(word))
-                {
-                    return word;
-                }
-            }*/
-
             // return word with highest frequency that matches pattern
 
             return options[0];
