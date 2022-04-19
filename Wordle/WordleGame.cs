@@ -25,11 +25,11 @@ namespace Wordle
 
                 if (IsCorrect(guessResult))
                 {
-                    return guessNumber;
+                    return guessNumber + 1;
                 }
             }
 
-            return guessNumber;
+            return guessNumber + 1;
         }
 
         public GuessResult CheckGuess(string guess)

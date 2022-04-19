@@ -7,12 +7,12 @@ namespace Wordle
     {
         static void Main(string[] args)
         {
-            var squid = new Squid();
+            var regina = new Regina();
 
             var game = new WordleGame("flair");
-            game.MaxGuesses = 40;
+            game.MaxGuesses = 20;
 
-            int guesses = game.Play(squid);
+            int guesses = game.Play(regina);
 
             Console.WriteLine(guesses);
 
@@ -28,6 +28,11 @@ namespace Wordle
 
             Regex rgx = new Regex(pattern);
             Console.WriteLine(rgx);*/
+
+            /*string word = "cider";
+            Regex keepers = new Regex(@"(?=.*c)(?=.*i)(?=.*n)");
+            Console.WriteLine(keepers);
+            Console.WriteLine(keepers.IsMatch(word));*/
         }
     }
 }
