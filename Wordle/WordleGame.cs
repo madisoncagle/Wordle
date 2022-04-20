@@ -29,7 +29,7 @@ namespace Wordle
                 }
             }
 
-            return guessNumber + 1;
+            return guessNumber;
         }
 
         public GuessResult CheckGuess(string guess)

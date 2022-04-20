@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,19 +13,41 @@ namespace Wordle
         public List<GuessResult> Guesses { get; set; }
 
         private List<string> options = new List<string>();
-        private string alphabet = "abcdefghijklmnopqrstuvwxyz";
+        //private string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
         public Regina()
         {
             Guesses = new List<GuessResult>();
-            options.Sort();
+
+            // read all 5 letter words into options
+            try
+            {
+                using (StreamReader streamReader = new StreamReader("../../../data/english_words_full.txt"))
+                {
+                    string line;
+                    while ((line = streamReader.ReadLine()) != null)
+                    {
+                        line = line.Trim();
+                        if (line.Length == 5)
+                        {
+                            options.Add(line);
+                            continue;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return;
+            }
         }
 
         public string GenerateGuess()
         {
             if (Guesses.Count == 0)
             {
-                return "crane";
+                return "stare";
             }
 
             GuessResult lastGuess = Guesses[^1];
@@ -40,7 +63,10 @@ namespace Wordle
                 }
             }
 
-            // return word with highest frequency that matches pattern
+            if (Guesses.Count == 1)
+            {
+                return "cloud";
+            }
 
             return options[0];
         }
@@ -80,6 +106,31 @@ namespace Wordle
             }
 
             return new Regex(keepers);
+        }
+
+        private double PercentCorrect()
+        {
+            double correct = 0;
+            string letters = "";
+
+            foreach (GuessResult gr in Guesses)
+            {
+                foreach (LetterGuess lg in gr.Guess)
+                {
+                    if (lg.LetterResult == LetterResult.Correct && !letters.Contains(lg.Letter))
+                    {
+                        letters += lg.Letter;
+                        correct += 1;
+                    }
+                    else if (lg.LetterResult == LetterResult.Misplaced && !letters.Contains(lg.Letter))
+                    {
+                        letters += lg.Letter;
+                        correct += 0.5;
+                    }
+                }
+            }
+
+            return correct / 5;
         }
     }
 }
