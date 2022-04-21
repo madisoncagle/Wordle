@@ -47,7 +47,7 @@ namespace Wordle
         {
             if (Guesses.Count == 0)
             {
-                return "stare";
+                return "crane";
             }
 
             GuessResult lastGuess = Guesses[^1];
@@ -65,7 +65,7 @@ namespace Wordle
 
             if (Guesses.Count == 1)
             {
-                return "cloud";
+                return "toils";
             }
 
             return options[0];
