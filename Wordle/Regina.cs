@@ -13,7 +13,6 @@ namespace Wordle
         public List<GuessResult> Guesses { get; set; }
 
         private List<string> options = new List<string>();
-        //private string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
         public Regina()
         {
@@ -71,6 +70,36 @@ namespace Wordle
             return options[0];
         }
 
+        public string GenerateEmojiSolution()
+        {
+            string emoji = $"Regina | {DateTime.Today.ToShortDateString()}";
+
+            foreach (GuessResult gr in Guesses)
+            {
+                emoji += "\n";
+
+                foreach (LetterGuess lg in gr.Guess)
+                {
+                    switch (lg.LetterResult)
+                    {
+                        case LetterResult.Correct:
+                            emoji += "+";
+                            break;
+                        case LetterResult.Misplaced:
+                            emoji += "o";
+                            break;
+                        case LetterResult.Incorrect:
+                            emoji += "-";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return emoji;
+        }
+
         private Regex GenerateRegex(GuessResult guess)
         {
             string pattern = "";
@@ -106,31 +135,6 @@ namespace Wordle
             }
 
             return new Regex(keepers);
-        }
-
-        private double PercentCorrect()
-        {
-            double correct = 0;
-            string letters = "";
-
-            foreach (GuessResult gr in Guesses)
-            {
-                foreach (LetterGuess lg in gr.Guess)
-                {
-                    if (lg.LetterResult == LetterResult.Correct && !letters.Contains(lg.Letter))
-                    {
-                        letters += lg.Letter;
-                        correct += 1;
-                    }
-                    else if (lg.LetterResult == LetterResult.Misplaced && !letters.Contains(lg.Letter))
-                    {
-                        letters += lg.Letter;
-                        correct += 0.5;
-                    }
-                }
-            }
-
-            return correct / 5;
         }
     }
 }
