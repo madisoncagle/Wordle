@@ -70,7 +70,7 @@ namespace Wordle
             return options[0];
         }
 
-        public string GenerateEmojiSolution()
+        public string GenerateEmojiString()
         {
             string emoji = $"Regina | {DateTime.Today.ToShortDateString()}";
 
