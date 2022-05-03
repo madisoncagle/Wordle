@@ -14,10 +14,10 @@ namespace Wordle
         public int Play(IWordleBot bot)
         {
             int guessNumber;
-            for (guessNumber = 0; guessNumber < MaxGuesses; guessNumber++)
+            for (guessNumber = 1; guessNumber < MaxGuesses; guessNumber++)
             {
                 string guess = bot.GenerateGuess();
-                Console.WriteLine($"guess {guessNumber + 1}: {guess}");
+                Console.WriteLine($"guess {guessNumber}: {guess}");
 
                 GuessResult guessResult = CheckGuess(guess);
                 bot.Guesses.Add(guessResult);
@@ -25,7 +25,7 @@ namespace Wordle
 
                 if (IsCorrect(guessResult))
                 {
-                    return guessNumber + 1;
+                    return guessNumber;
                 }
             }
 
