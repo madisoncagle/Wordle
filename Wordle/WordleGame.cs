@@ -4,7 +4,7 @@ namespace Wordle
     public class WordleGame
     {
         public string SecretWord { get; set; }
-        public int MaxGuesses { get; set; }
+        public int MaxGuesses { get; set; } = 100;
 
         public WordleGame(string secretWord = "arise")
         {
