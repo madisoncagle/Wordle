@@ -9,7 +9,7 @@ namespace Wordle
         {
             var regina = new Regina();
 
-            var game = new WordleGame("retro");
+            var game = new WordleGame("berth");
 
             int guesses = game.Play(regina);
 
@@ -21,6 +21,7 @@ namespace Wordle
              * cater 4-L         manor 4-6
              * creak 4-5         gloom 5-6
              * cacao 4-5         loser 3-4
+             * voice 3-4
              */
 
             #region average testing
