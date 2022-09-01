@@ -9,7 +9,7 @@ namespace Wordle
         {
             var regina = new Regina();
 
-            var game = new WordleGame("irony");
+            var game = new WordleGame("fungi");
 
             int guesses = game.Play(regina);
 
@@ -23,7 +23,7 @@ namespace Wordle
              * cacao 4-5         loser 3-4
              * voice 3-4         coyly 3-4
              * alien 3-4         cling 3-4
-             * irony 3-4
+             * irony 3-4         onset 3-5
              */
 
             #region average testing
