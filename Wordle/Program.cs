@@ -9,7 +9,7 @@ namespace Wordle
         {
             var regina = new Regina();
 
-            var game = new WordleGame("fungi");
+            var game = new WordleGame("theme");
 
             int guesses = game.Play(regina);
 
