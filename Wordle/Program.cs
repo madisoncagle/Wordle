@@ -11,8 +11,8 @@ namespace Wordle
     {
         static void Main(string[] args)
         {
-            // boring data path to save me typing
-            string dp = "../../../data/reginaScores.csv";
+            // boring data paths to save me typing
+            string dp = "../../../data";
 
             // play regina
             var regina = new Regina();
@@ -20,26 +20,37 @@ namespace Wordle
             var word = "sneak";
             var game = new WordleGame(word);
 
-            int guesses = game.Play(regina);
+            int reginaScore = game.Play(regina);
 
-            Console.WriteLine(guesses);
+            Console.WriteLine(reginaScore);
+
+            // get my score
+            Console.WriteLine("Your score: ");
+            string input = Console.ReadLine().ToLower();
+            int? myScore = input == "l" ? null : int.Parse(input);
 
             // write to reginaScores.csv
-            string[] lastEntry = File.ReadLines(dp).ToList()[^1].Split(','); // extract last line of reginaScores.csv
+            string[] lastEntry = File.ReadLines($"{dp}/reginaScores.csv").ToList()[^1].Split(','); // extract last line of reginaScores.csv
 
             if (!(lastEntry[2] == word)) // keep from duplicating data
             {
-                // parse date and wordle #
+                // parse date and wordle # and increment
                 DateTime date = DateTime.Parse(lastEntry[0]).AddDays(1);
                 int num = int.Parse(lastEntry[1]) + 1;
 
                 // get W/L
-                char winLoss = guesses <= 6 ? 'W' : 'L';
+                char winLoss = reginaScore <= 6 ? 'W' : 'L';
 
                 // append to csv file
-                File.AppendAllText(dp, $"\n{date.ToShortDateString()},{num},{word},{guesses},{winLoss}");
+                File.AppendAllText($"{dp}/reginaScores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{winLoss}");
 
-                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {guesses}\nWin/Loss: {winLoss}");
+                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin/Loss: {winLoss}");
+
+                // write to fileOfShame.csv ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
+                if (reginaScore < myScore)
+                {
+                    File.AppendAllText($"{dp}/fileOfShame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
+                }
             }
 
             #region initial csv write
