@@ -22,7 +22,7 @@ namespace Wordle
 
             int reginaScore = game.Play(regina);
 
-            Console.WriteLine(reginaScore);
+            Console.WriteLine($"Regina's Score: {reginaScore}");
 
             // get my score
             Console.Write("Your score: ");
