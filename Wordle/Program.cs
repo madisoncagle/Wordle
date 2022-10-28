@@ -25,7 +25,7 @@ namespace Wordle
             Console.WriteLine(reginaScore);
 
             // get my score
-            Console.WriteLine("Your score: ");
+            Console.Write("Your score: ");
             string input = Console.ReadLine().ToLower();
             int? myScore = input == "l" ? null : int.Parse(input);
 
