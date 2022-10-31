@@ -17,7 +17,7 @@ namespace Wordle
             // play regina
             var regina = new Regina();
 
-            var word = "libel";
+            var word = "waltz";
             var game = new WordleGame(word);
 
             int reginaScore = game.Play(regina);
