@@ -37,8 +37,6 @@ namespace Wordle
                 Console.WriteLine(e);
                 return;
             }
-
-            //options.Sort();
         }
 
         public string GenerateGuess()

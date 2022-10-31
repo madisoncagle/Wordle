@@ -15,25 +15,21 @@ namespace Wordle
             string dp = "../../../data";
 
             // play regina
-            var regina = new Regina();
-
-            var word = "waltz";
-            var game = new WordleGame(word);
-
-            int reginaScore = game.Play(regina);
-
-            Console.WriteLine($"Regina's Score: {reginaScore}");
+            var word = "aptly";
+            int reginaScore = PlayRegina(word);
 
             // get my score
-            Console.Write("Your score: ");
-            string input = Console.ReadLine().ToLower();
-            int? myScore = input == "l" ? null : int.Parse(input);
+            int? myScore = GetMyScore();
 
-            // write to reginaScores.csv
-            string[] lastEntry = File.ReadLines($"{dp}/scores.csv").ToList()[^1].Split(','); // extract last line of reginaScores.csv
+            // get all past words
+            List<string> pastWords = GetPastWords($"{dp}/scores.csv");
 
-            if (!(lastEntry[2] == word)) // keep from duplicating data
+            // write to scores.csv
+            if (!(pastWords.Contains(word))) // keep from duplicating data
             {
+                // get last entry as ["0000-00-00", "000", "word", "W"]
+                string[] lastEntry = File.ReadLines($"{dp}/scores.csv").ToList()[^1].Split(',');
+
                 // parse date and wordle # and increment
                 DateTime date = DateTime.Parse(lastEntry[0]).AddDays(1);
                 int num = int.Parse(lastEntry[1]) + 1;
@@ -41,16 +37,16 @@ namespace Wordle
                 // get W/L
                 char winLoss = reginaScore <= 6 ? 'W' : 'L';
 
-                // append to csv file
+                // append to scores
                 File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{winLoss}");
 
-                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin/Loss: {winLoss}");
-
-                // write to fileOfShame.csv ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
+                // write to file of shame ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
                 if (reginaScore < myScore)
                 {
-                    File.AppendAllText($"{dp}/fileOfShame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
+                    File.AppendAllText($"{dp}/file_of_shame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
                 }
+
+                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin/Loss: {winLoss}");
             }
 
             #region initial csv write
@@ -91,6 +87,40 @@ namespace Wordle
 
             Console.WriteLine((double)sum / words.Count);*/
             #endregion
+        }
+
+        static int PlayRegina(string word)
+        {
+            var regina = new Regina();
+            var game = new WordleGame(word);
+
+            int score = game.Play(regina);
+
+            Console.WriteLine($"Regina's Score: {score}");
+
+            return score;
+        }
+
+        static int? GetMyScore()
+        {
+            Console.Write("Your score: ");
+            string input = Console.ReadLine().ToLower();
+            int? score = input == "l" ? null : int.Parse(input);
+
+            return score;
+        }
+
+        static List<string> GetPastWords(string path)
+        {
+            List<string> entries = File.ReadLines(path).ToList();
+            List<string> pastWords = new List<string>();
+
+            foreach (string entry in entries)
+            {
+                pastWords.Add(entry.Split(',')[2]);
+            }
+
+            return pastWords;
         }
     }
 }
