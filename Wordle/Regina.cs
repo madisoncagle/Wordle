@@ -21,17 +21,14 @@ namespace Wordle
             // read all 5 letter words into options
             try
             {
-                using (StreamReader streamReader = new StreamReader("../../../data/english_words_full.txt"))
+                using (StreamReader streamReader = new StreamReader("../../../data/five_letter_words.txt"))
                 {
                     string line;
                     while ((line = streamReader.ReadLine()) != null)
                     {
                         line = line.Trim();
-                        if (line.Length == 5)
-                        {
-                            options.Add(line);
-                            continue;
-                        }
+                        options.Add(line);
+                        continue;
                     }
                 }
             }
