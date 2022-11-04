@@ -67,36 +67,6 @@ namespace Wordle
             return options[0];
         }
 
-        public string GenerateEmojiString()
-        {
-            string emoji = $"Regina | {DateTime.Today.ToShortDateString()}";
-
-            foreach (GuessResult gr in Guesses)
-            {
-                emoji += "\n";
-
-                foreach (LetterGuess lg in gr.Guess)
-                {
-                    switch (lg.LetterResult)
-                    {
-                        case LetterResult.Correct:
-                            emoji += "+";
-                            break;
-                        case LetterResult.Misplaced:
-                            emoji += "o";
-                            break;
-                        case LetterResult.Incorrect:
-                            emoji += "-";
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            return emoji;
-        }
-
         private Regex GenerateRegex(GuessResult guess)
         {
             string pattern = "";
