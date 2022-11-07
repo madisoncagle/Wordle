@@ -12,16 +12,17 @@ namespace Wordle
     {
         static void Main(string[] args)
         {
-            Regina regina = new Regina();
-            ReginaJr reginaJr = new ReginaJr();
+            var regina = new Regina();
+            var reginajr = new ReginaJr();
+            var reginaiii = new ReginaIII();
 
             var game = new WordleGame("stale");
 
             int reginaScore = game.Play(regina);
-            int reginaJrScore = game.Play(reginaJr);
+            int rjrscore = game.Play(reginajr);
+            int r3score = game.Play(reginaiii);
 
-            Console.WriteLine($"Regina: {reginaScore}");
-            Console.WriteLine($"ReginaJr: {reginaJrScore}");
+            Console.WriteLine($"Regina: {reginaScore}\nReginaJr: {rjrscore}\nReginaIII: {r3score}");
 
             #region play regina
             /*// boring data path to save me typing
