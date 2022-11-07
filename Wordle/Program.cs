@@ -15,7 +15,7 @@ namespace Wordle
             Regina regina = new Regina();
             ReginaJr reginaJr = new ReginaJr();
 
-            var game = new WordleGame("cater");
+            var game = new WordleGame("stale");
 
             int reginaScore = game.Play(regina);
             int reginaJrScore = game.Play(reginaJr);
