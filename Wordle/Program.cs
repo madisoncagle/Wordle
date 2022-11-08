@@ -41,7 +41,7 @@ namespace Wordle
                 File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{winLoss}");
 
                 // write to file of shame ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
-                if (reginaScore < myScore)
+                if (winLoss == 'W' && reginaScore < myScore)
                 {
                     File.AppendAllText($"{dp}/file_of_shame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
                 }
