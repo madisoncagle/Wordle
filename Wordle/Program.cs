@@ -15,7 +15,7 @@ namespace Wordle
             string dp = "../../../data";
 
             // play regina
-            var word = "there";
+            var word = "itchy";
             int reginaScore = PlayRegina(word);
 
             // get my score
