@@ -2,7 +2,7 @@
 A Wordle simulator for testing WordleBots in C#
 
 ## About Regina
-My bot Regina plays Wordle by starting off with the same 2 words before selecting a valid word from `five_letter_words.txt` for her subsequent guesses. With her current algorithm, Regina's average is `5.7` and her win percentage is `~70%`.  
+My bot Regina plays Wordle by starting off with the same 2 words before selecting a valid word from `five_letter_words.txt` for her subsequent guesses. With her current algorithm, Regina's average is `~5.7` and her win percentage is `~70%`.  
 
 ***Note: Regina is not AI -- but one day a future version of her could be.***
 
