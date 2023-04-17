@@ -15,11 +15,16 @@ namespace Wordle
             string dp = "../../../data";
 
             // play regina
-            var word = "grout";
+            var word = "dwelt";
             int reginaScore = PlayRegina(word);
 
             // get my score
             int? myScore = GetMyScore();
+            while (myScore < 1 || myScore > 6)
+            {
+                Console.WriteLine("Invalid score.");
+                myScore = GetMyScore();
+            }
 
             // get all past words
             List<string> pastWords = GetPastWords($"{dp}/scores.csv");
