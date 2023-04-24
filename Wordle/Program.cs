@@ -40,18 +40,18 @@ namespace Wordle
                 int num = int.Parse(lastEntry[1]) + 1;
 
                 // get W/L
-                char winLoss = reginaScore <= 6 ? 'W' : 'L';
+                bool win = reginaScore <= 6 ? true : false;
 
                 // append to scores
-                File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{winLoss}");
+                File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{win}");
 
                 // write to file of shame ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
-                if (winLoss == 'W' && reginaScore < myScore)
+                if (win && reginaScore < myScore)
                 {
                     File.AppendAllText($"{dp}/file_of_shame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
                 }
 
-                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin/Loss: {winLoss}");
+                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin: {win}");
             }
 
             #region initial csv write
