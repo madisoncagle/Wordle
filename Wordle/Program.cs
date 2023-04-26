@@ -40,7 +40,7 @@ namespace Wordle
                 int num = int.Parse(lastEntry[1]) + 1;
 
                 // get W/L
-                bool win = reginaScore <= 6 ? true : false;
+                bool win = reginaScore <= 6;
 
                 // append to scores
                 File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{win}");
