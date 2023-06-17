@@ -17,14 +17,18 @@ namespace Wordle
             // play regina
             var word = "ranch";
             int reginaScore = PlayRegina(word);
+            bool win = reginaScore <= 6;
 
-            // get my score
-            int? myScore = GetMyScore();
-            while (myScore < 1 || myScore > 6)
+            // get my score if Regina wins
+            /*if (win)
             {
-                Console.WriteLine("Invalid score.");
-                myScore = GetMyScore();
-            }
+                int? myScore = GetMyScore();
+                while (myScore < 1 || myScore > 6)
+                {
+                    Console.WriteLine("Invalid score.");
+                    myScore = GetMyScore();
+                }
+            }*/
 
             // get all past words
             List<string> pastWords = GetPastWords($"{dp}/scores.csv");
@@ -32,23 +36,31 @@ namespace Wordle
             // write to scores.csv
             if (!(pastWords.Contains(word))) // keep from duplicating data
             {
-                // get last entry as ["0000-00-00", "000", "word", "W"]
+                // get last entry as ["0000-00-00", "000", "word", "True"]
                 string[] lastEntry = File.ReadLines($"{dp}/scores.csv").ToList()[^1].Split(',');
 
                 // parse date and wordle # and increment
                 DateTime date = DateTime.Parse(lastEntry[0]).AddDays(1);
                 int num = int.Parse(lastEntry[1]) + 1;
 
-                // get W/L
-                bool win = reginaScore <= 6;
-
                 // append to scores
                 File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{win}");
 
                 // write to file of shame ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
-                if (win && reginaScore < myScore)
+                if (win)
                 {
-                    File.AppendAllText($"{dp}/file_of_shame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
+                    int? myScore = GetMyScore();
+
+                    while (myScore < 1 || myScore > 6)
+                    {
+                        Console.WriteLine("Invalid score.");
+                        myScore = GetMyScore();
+                    }
+
+                    if (reginaScore < myScore) // maybe need check for if Regina wins and I lose
+                    {
+                        File.AppendAllText($"{dp}/file_of_shame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
+                    }
                 }
 
                 Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin: {win}");
