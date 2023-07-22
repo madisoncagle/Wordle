@@ -15,20 +15,9 @@ namespace Wordle
             string dp = "../../../data";
 
             // play regina
-            string word = "flank";
+            string word = "froze";
             int reginaScore = PlayRegina(word);
             bool win = reginaScore <= 6;
-
-            // get my score if Regina wins
-            /*if (win)
-            {
-                int? myScore = GetMyScore();
-                while (myScore < 1 || myScore > 6)
-                {
-                    Console.WriteLine("Invalid score.");
-                    myScore = GetMyScore();
-                }
-            }*/
 
             // get all past words
             List<string> pastWords = GetPastWords($"{dp}/scores.csv");
