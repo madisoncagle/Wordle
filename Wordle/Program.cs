@@ -11,11 +11,11 @@ namespace Wordle
     {
         static void Main(string[] args)
         {
-            // boring data path to save me typing
+            // data path to save me typing cuz im lazy
             string dp = "../../../data";
 
             // play regina
-            string word = "audio";
+            string word = "merry";
             int reginaScore = PlayRegina(word);
             bool win = reginaScore <= 6;
 
