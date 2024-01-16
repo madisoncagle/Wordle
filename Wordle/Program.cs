@@ -17,7 +17,6 @@ namespace Wordle
             // play regina
             string word = "blond";
             int reginaScore = PlayRegina(word);
-            bool win = reginaScore <= 6;
 
             // get all past words
             List<string> pastWords = GetPastWords($"{dp}/scores.csv");
@@ -33,10 +32,10 @@ namespace Wordle
                 int num = int.Parse(lastEntry[1]) + 1;
 
                 // append to scores
-                File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{win}");
+                File.AppendAllText($"{dp}/scores.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore}");
 
                 // write to file of shame ONLY IF NECESSARY, WHICH IT SHOULDN'T BE
-                if (win)
+                if (reginaScore <= 6)
                 {
                     int? myScore = GetMyScore();
 
@@ -52,7 +51,7 @@ namespace Wordle
                     }
                 }
 
-                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin: {win}");
+                Console.WriteLine($"Date: {date.ToShortDateString()}\nWordle: {num}\nScore: {reginaScore}\nWin: {reginaScore <= 6}");
             }
 
             #region initial csv write
