@@ -15,7 +15,7 @@ namespace Wordle
             string dp = "../../../data";
 
             // play regina
-            string word = "blond";
+            string word = "large";
             int reginaScore = PlayRegina(word);
 
             // get all past words
