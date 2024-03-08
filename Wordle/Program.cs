@@ -11,11 +11,11 @@ namespace Wordle
     {
         static void Main(string[] args)
         {
-            // data path to save me typing cuz im lazy
+            // data path to save me typing
             string dp = "../../../data";
 
             // play regina
-            string word = "large";
+            string word = "heavy";
             int reginaScore = PlayRegina(word);
 
             // get all past words
@@ -45,7 +45,7 @@ namespace Wordle
                         myScore = GetMyScore();
                     }
 
-                    if (reginaScore < myScore) // maybe need check for if Regina wins and I lose
+                    if (reginaScore < myScore || myScore == null) // maybe need check for if Regina wins and I lose
                     {
                         File.AppendAllText($"{dp}/file_of_shame.csv", $"\n{date.ToShortDateString()},{num},{word},{reginaScore},{myScore}");
                     }
